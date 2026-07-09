@@ -52,7 +52,7 @@ module "function_app" {
   owner               = var.owner
   resource_group_name = data.azurerm_resource_group.rg.name
   location            = data.azurerm_resource_group.rg.location
-  service_plan_id     = data.azurerm_service_plan.shared.id
+  service_plan_id = "/subscriptions/5e683e0f-b00c-48d6-9769-5aaf598de8f1/resourceGroups/rg-shared-prf2026/providers/Microsoft.Web/serverFarms/plan-npr-prf2026"
   tags                = local.tags
 }
 
