@@ -17,7 +17,7 @@ resource "azurerm_linux_web_app" "app" {
   name                = "app-${var.owner}-tf"
   resource_group_name = var.resource_group_name
   
-  location            = data.azurerm_service_plan.shared.location
+  location = "francecentral"
   
   service_plan_id = "/subscriptions/5e683e0f-b00c-48d6-9769-5aaf598de8f1/resourceGroups/rg-shared-prf2026/providers/Microsoft.Web/serverFarms/plan-npr-prf2026"
   https_only          = true
