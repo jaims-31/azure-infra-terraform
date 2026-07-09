@@ -25,7 +25,7 @@ resource "azurerm_linux_function_app" "fn" {
   name                       = "fn-${var.owner}-tf"
   resource_group_name        = var.resource_group_name
   location                   = var.location
-  service_plan_id            = var.service_plan_id
+  service_plan_id = "/subscriptions/5e683e0f-b00c-48d6-9769-5aaf598de8f1/resourceGroups/rg-shared-prf2026/providers/Microsoft.Web/serverFarms/plan-npr-prf2026"
   
   storage_account_name       = azurerm_storage_account.fn_storage.name
   storage_account_access_key = azurerm_storage_account.fn_storage.primary_access_key

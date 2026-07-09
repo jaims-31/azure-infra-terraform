@@ -8,10 +8,10 @@ terraform {
   }
 }
 
-data "azurerm_service_plan" "shared" {
-  name                = split("/", var.service_plan_id)[8]
-  resource_group_name = split("/", var.service_plan_id)[4]
-}
+#data "azurerm_service_plan" "shared" {
+ # name                = split("/", var.service_plan_id)[8]
+  #resource_group_name = split("/", var.service_plan_id)[4]
+#}
 
 resource "azurerm_linux_web_app" "app" {
   name                = "app-${var.owner}-tf"
@@ -19,7 +19,7 @@ resource "azurerm_linux_web_app" "app" {
   
   location            = data.azurerm_service_plan.shared.location
   
-  service_plan_id     = var.service_plan_id
+  service_plan_id = "/subscriptions/5e683e0f-b00c-48d6-9769-5aaf598de8f1/resourceGroups/rg-shared-prf2026/providers/Microsoft.Web/serverFarms/plan-npr-prf2026"
   https_only          = true
 
   site_config {
