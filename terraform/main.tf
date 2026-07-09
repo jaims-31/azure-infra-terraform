@@ -68,12 +68,11 @@ module "container" {
 }
 
 # ── Network (Étape 7) ─────────────────────────────────────────────────────────
-# On le laisse commenté pour l'instant comme demandé
-# module "network" {
-#   source = "./modules/network"
-#
-#   owner               = ???
-#   resource_group_name = ???
-#   location            = ???
-#   tags                = ???
-# }
+module "network" {
+  source = "./modules/network"
+
+  owner               = var.owner
+  resource_group_name = data.azurerm_resource_group.rg.name
+  location            = data.azurerm_resource_group.rg.location
+  tags                = local.tags
+}
