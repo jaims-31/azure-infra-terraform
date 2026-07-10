@@ -31,6 +31,7 @@ resource "azurerm_linux_web_app" "app" {
 
   site_config {
     minimum_tls_version = "1.2"
+    always_on           = false
     application_stack {
       python_version = "3.11"
     }

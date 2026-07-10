@@ -2,12 +2,13 @@ name: 'Terraform CI/CD'
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "feat/cicd-pipeline" ]
   pull_request:
     branches: [ "main" ]
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   terraform:
@@ -17,10 +18,10 @@ jobs:
       run:
         working-directory: ./terraform
     env:
-      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      ARM_CLIENT_ID: ${{ vars.AZURE_CLIENT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      ARM_TENANT_ID: ${{ vars.AZURE_TENANT_ID }}
+      ARM_USE_OIDC: true
 
     steps:
     - name: Checkout Code
