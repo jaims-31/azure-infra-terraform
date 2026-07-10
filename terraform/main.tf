@@ -20,8 +20,8 @@ data "azurerm_resource_group" "rg" {
 }
 
 #data "azurerm_service_plan" "shared" {
- # name                = var.shared_plan_name
-  #resource_group_name = var.shared_rg_name
+# name                = var.shared_plan_name
+#resource_group_name = var.shared_rg_name
 #}
 
 # ── Storage (Étape 2) ─────────────────────────────────────────────────────────
@@ -37,10 +37,10 @@ module "storage" {
 # ── App Service (Étape 3) ─────────────────────────────────────────────────────
 module "app_service" {
   source = "./modules/app-service"
- 
+
   owner               = var.owner
   resource_group_name = data.azurerm_resource_group.rg.name
-  service_plan_id = "/subscriptions/5e683e0f-b00c-48d6-9769-5aaf598de8f1/resourceGroups/rg-shared-prf2026/providers/Microsoft.Web/serverFarms/plan-npr-prf2026"
+  service_plan_id     = "/subscriptions/5e683e0f-b00c-48d6-9769-5aaf598de8f1/resourceGroups/rg-shared-prf2026/providers/Microsoft.Web/serverFarms/plan-npr-prf2026"
   tags                = local.tags
   location            = data.azurerm_resource_group.rg.location
 }
@@ -52,7 +52,7 @@ module "function_app" {
   owner               = var.owner
   resource_group_name = data.azurerm_resource_group.rg.name
   location            = data.azurerm_resource_group.rg.location
-  service_plan_id = "/subscriptions/5e683e0f-b00c-48d6-9769-5aaf598de8f1/resourceGroups/rg-shared-prf2026/providers/Microsoft.Web/serverFarms/plan-npr-prf2026"
+  service_plan_id     = "/subscriptions/5e683e0f-b00c-48d6-9769-5aaf598de8f1/resourceGroups/rg-shared-prf2026/providers/Microsoft.Web/serverFarms/plan-npr-prf2026"
   tags                = local.tags
 }
 
