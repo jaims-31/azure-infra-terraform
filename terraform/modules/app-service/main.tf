@@ -3,7 +3,7 @@ resource "azurerm_service_plan" "local_plan_app" {
   location            = "francecentral"
   resource_group_name = "fbarryRG"
   os_type             = "Linux"
-  sku_name            = "B1"
+  sku_name            = "F1"
 }
 terraform {
   required_version = ">= 1.9"
