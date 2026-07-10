@@ -1,3 +1,10 @@
+resource "azurerm_service_plan" "local_plan_app" {
+  name                = "plan-app-fbarry"
+  location            = "francecentral"
+  resource_group_name = "fbarryRG"
+  os_type             = "Linux"
+  sku_name            = "B1"
+}
 terraform {
   required_version = ">= 1.9"
   required_providers {
@@ -19,7 +26,7 @@ resource "azurerm_linux_web_app" "app" {
   
   location = "francecentral"
   
-  service_plan_id = "/subscriptions/5e683e0f-b00c-48d6-9769-5aaf598de8f1/resourceGroups/rg-shared-prf2026/providers/Microsoft.Web/serverFarms/plan-npr-prf2026"
+  service_plan_id = azurerm_service_plan.local_plan_app.id
   https_only          = true
 
   site_config {
