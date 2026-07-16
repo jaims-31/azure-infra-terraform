@@ -17,9 +17,9 @@ resource "azurerm_container_group" "aci" {
   dns_name_label      = "aci-${var.owner}-tf"
   os_type             = "Linux"
 
- container {
-    name   = "nginx"
-    image  = "mcr.microsoft.com/oss/nginx/nginx:1.25.3" # Version stable et fiable chez Microsoft
+container {
+    name   = "hello-world"
+    image  = "mcr.microsoft.com/azuredocs/aci-helloworld:latest" # <-- L'image infaillible de Microsoft
     cpu    = "0.5"
     memory = "0.5"
     
