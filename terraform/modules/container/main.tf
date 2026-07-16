@@ -17,12 +17,12 @@ resource "azurerm_container_group" "aci" {
   dns_name_label      = "aci-${var.owner}-tf"
   os_type             = "Linux"
 
-  container {
+ container {
     name   = "nginx"
-    image  = "nginx:latest"
+    image  = "mcr.microsoft.com/oss/nginx/nginx:1.25.3" # Version stable et fiable chez Microsoft
     cpu    = "0.5"
     memory = "0.5"
-
+    
     ports {
       port     = 80
       protocol = "TCP"
