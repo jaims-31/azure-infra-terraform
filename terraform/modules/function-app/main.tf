@@ -8,7 +8,14 @@ terraform {
   }
 }
 
-# TODO (1/2) : créer un azurerm_storage_account dédié à la Function App
+resource "azurerm_service_plan" "local_plan_fn" {
+  name                = "plan-fn-${var.owner}-tf"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  os_type             = "Linux"
+  sku_name            = "B1" 
+}
+
 resource "azurerm_storage_account" "fn_storage" {
   name                     = "stfn${replace(var.owner, "-", "")}"
   resource_group_name      = var.resource_group_name
@@ -20,14 +27,12 @@ resource "azurerm_storage_account" "fn_storage" {
   tags                     = merge(var.tags, { purpose = "function-storage" })
 }
 
-# TODO (2/2) : créer un azurerm_linux_function_app
 resource "azurerm_linux_function_app" "fn" {
   name                       = "fn-${var.owner}-tf"
   resource_group_name        = var.resource_group_name
   location                   = var.location
   
-  
-  service_plan_id            = var.service_plan_id
+  service_plan_id            = azurerm_service_plan.local_plan_fn.id
   
   storage_account_name       = azurerm_storage_account.fn_storage.name
   storage_account_access_key = azurerm_storage_account.fn_storage.primary_access_key
