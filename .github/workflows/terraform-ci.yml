@@ -3,11 +3,8 @@ name: Terraform CI
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+      - feat/cicd-pipeline
+  
 permissions:
   id-token: write
   contents: read
