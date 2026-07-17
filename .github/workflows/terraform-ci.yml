@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
   
 permissions:
   id-token: write
@@ -19,11 +22,15 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
-
-      - name: Terraform Format Check
-        run: terraform fmt -check
 
       - name: Terraform Init
         env:
@@ -38,6 +45,9 @@ jobs:
                -backend-config="container_name=tfstate" \
                -backend-config="key=franckbarry.terraform.tfstate" \
                -input=false
+
+      - name: Terraform Format Check
+        run: terraform fmt -check
 
       - name: Terraform Validate
         run: terraform validate
