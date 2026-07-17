@@ -1,4 +1,4 @@
-name: Terraform CI
+name: 'Terraform CI'
 
 on:
   push:
@@ -15,10 +15,14 @@ permissions:
 jobs:
   terraform-ci:
     runs-on: ubuntu-latest
+    if: ${{ github.actor != 'dependabot[bot]' }}
     defaults:
       run:
         working-directory: ./terraform
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
       - name: Azure Login
         uses: azure/login@v2
         with:
