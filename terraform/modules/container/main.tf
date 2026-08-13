@@ -17,12 +17,12 @@ resource "azurerm_container_group" "aci" {
   dns_name_label      = "aci-${var.owner}-tf"
   os_type             = "Linux"
 
-  container {
-    name   = "nginx"
-    image  = "nginx:latest"
+container {
+    name   = "hello-world"
+    image  = "mcr.microsoft.com/azuredocs/aci-helloworld:latest" # <-- L'image infaillible de Microsoft
     cpu    = "0.5"
     memory = "0.5"
-
+    
     ports {
       port     = 80
       protocol = "TCP"
